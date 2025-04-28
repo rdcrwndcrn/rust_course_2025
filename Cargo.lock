@@ -3,10 +3,6 @@
 version = 4
 
 [[package]]
-name = "Fahreinheit_Celcius_Converter"
-version = "0.1.0"
-
-[[package]]
 name = "cfg-if"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -18,6 +14,10 @@ version = "0.1.0"
 
 [[package]]
 name = "exercise_2"
+version = "0.1.0"
+
+[[package]]
+name = "fahrenheit_celsius_converter"
 version = "0.1.0"
 
 [[package]]
