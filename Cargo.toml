@@ -1,5 +1,6 @@
 [workspace]
-members = [ "Fahreinheit_Celcius_Converter",
+members = [
+    "fahrenheit_celsius_converter",
     "exercise_1",
     "exercise_2",
     "lecture_examples"
