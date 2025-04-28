@@ -4,5 +4,5 @@ members = [
     "exercise_1",
     "exercise_2",
     "lecture_examples"
-]
+, "fibonacci_number"]
 resolver = "3"
