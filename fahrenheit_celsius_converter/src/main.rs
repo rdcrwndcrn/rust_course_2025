@@ -87,7 +87,7 @@ fn get_user_input() -> f64 {
                     // ending program
                     std::process::exit(0);
                 }
-                // check if input is usable and if that the case return it
+                // check if input is usable and if that's the case, return it
                 match user_input_trimmed.parse::<f64>() {
                     Ok(value) => {
                         // returning value
@@ -99,6 +99,7 @@ fn get_user_input() -> f64 {
                 }
 
             }
+            // invalid input starts the loop over
             _ => {
                 println!("Invalid input, again:");
             }

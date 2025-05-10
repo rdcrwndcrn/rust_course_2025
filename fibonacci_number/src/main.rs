@@ -13,8 +13,7 @@ fn main() {
                 println!("The {position}-th Fibonacci number is {solution}.");
             }
             Err(_) => {
-                // again
-                continue;
+                // try again
             }
         }
     }

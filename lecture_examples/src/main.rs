@@ -8,7 +8,7 @@ fn main() -> io::Result<()> {
     //print to stderr
     eprintln!("world!");
 
-    //Wait for enter key press
+    //Wait for the enter key press
     println!("Press enter to continue...");
     let mut _buffer = String::new();
     io::stdin().read_line(&mut _buffer)?;
@@ -38,7 +38,7 @@ fn main() {
 }
 */
 
-//* L2 - Toolchain - Example 3
+/* L2 - Toolchain - Example 3
 use rand::distributions::Alphanumeric;
 use rand::Rng;
 use std::thread;
@@ -60,5 +60,140 @@ fn main() {
         thread::sleep(Duration::from_secs(10));
     }
 }
- //*/
+*/
+
+/* L3 - Toolchain - Example 1
+// understanding implicit and explicit positional arguments for formating strings
+
+fn main() {
+    println!("{} , {2} , {1} , {} , {0}", 1, 2, 3);           
+    // println!("{3} , {2} , {1}", 1, 2, 3);                     // index 3 does not exist
+    // println!("{3} , {2} , {1}", 1, 2, 3, 4);                  // argument 1 never used
+    println!("{} , {3} , {2} , {1}", 1, 2, 3, 4);              
+    // println!("{} , {2} , {1} , {0}", 1, 2, 3, 4);             // argument 4 never used
+
+}
+ */
+
+/* L3 - Toolchain - Example 2
+// pause vio stdin
+use std::io;
+
+fn main() -> io::Result<()> {
+    // Print to stdout
+    println!("Hello");  // Will be printed to stdout
+
+    // Print to stderr
+    eprintln!("World"); // Will be printed to stderr
+
+    // Wait for the Enter key press
+    println!("Press Enter to continue...");
+    let mut _buffer = String::new();
+    io::stdin().read_line(&mut _buffer)?;
+
+    Ok(())
+}
+*/
+
+// L3 - Toolchain - Example 3
+/* Quine
+fn main() {
+    print!(
+        "fn main(){{print!({0:?},{0:?})}}",
+        "fn main(){{print!({0:?},{0:?})}}"
+    )
+}
+ */
+
+
+// L3 - Toolchain - Example 4
+/* Quine with raw strings and without debug print
+fn main(){print!(r#"fn main(){{print!(r#{1}{0}{1}#,r#{1}{0}{1}#,'"')}}"#,r#"fn main(){{print!(r#{1}{0}{1}#,r#{1}{0}{1}#,'"')}}"#,'"')}
+ */
+
+/* L3 - Toolchain - Example 5
+// generate a sequence of random numbers
+use rand::distributions::Alphanumeric;
+use rand::Rng;
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    loop {
+        // Generate a random 32-character string
+        let random_string: String = rand::thread_rng()
+            .sample_iter(&Alphanumeric)
+            .take(32)
+            .map(char::from)
+            .collect();
+
+        // Print the string
+        println!("{}", random_string);
+
+        // Wait for 10 seconds
+        thread::sleep(Duration::from_secs(2));
+    }
+}
+ */
+
+/* L4 - Toolchain - Example 1
+
+fn main() {
+    let é = 0xE9; // variable names can contain unicode characters
+    let ö = 0xF6;
+    let é_utf_8 = "é".as_bytes(); // &[u8]
+    let ö_utf_8 = "ö".as_bytes(); // &[u8]
+    println!(
+        "é: unicode {é:b} = utf-8 {0:x},{1:x} (hex) = {0:b},{1:b} (binary)",
+        é_utf_8[0],
+        é_utf_8[1]
+    );
+    //noinspection RsInvalidFormatString
+    println!(
+        "ö: unicode {ö:b} = utf-8 {0:x},{1:x} (hex) = {0:b},{1:b} (binary)",
+        ö_utf_8[0],
+        ö_utf_8[1]
+    );
+}
+ */
+
+/* L4 - Toolchain - Example 2
+
+fn main() {
+    println!("123456781234567812345678");
+    println!("Aa        B    C");
+    println!("Aa\tB\tC");
+    println!("\tB\tC");
+    println!("Aa\rB\tC");
+    println!("Aa\rB    C");
+}
+*/
+
+/* L4 - Toolchain - Example 3
+fn main() {
+    println!("    println!(\"123456781234567812345678\")");
+    println!("    println!(\"Aa        B        C\")");
+    println!("    println!(\"Aa\\tB\\tC\")");
+    println!("    println!(\"\\tB\\tC\")");
+    println!("    println!(\"Aa\\rB\\tC\")");
+    println!("    println!(\"Aa\\rB        C\")");
+    println!("Prints:");
+}
+ */
+
+// L4 - Toolchain - Example 4
+
+fn main() {
+    // A byte string literal — an &[u8] of the ASCII codes for "Hello"
+    let bytes = b"Hello";
+    // The same bytes, written with hexadecimal escapes
+    let hex   = b"\x48\x65\x6C\x6C\x6F";
+
+    // Debug-print them as byte arrays
+    println!("bytes = {:?}", bytes); // bytes = [72, 101, 108, 108, 111]
+    println!("hex   = {:?}", hex);   // hex   = [72, 101, 108, 108, 111]
+
+    // Verify they’re equal
+    assert_eq!(bytes, hex);
+}
 

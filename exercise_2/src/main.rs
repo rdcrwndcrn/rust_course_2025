@@ -81,3 +81,13 @@ fn count_nouns (slice: &str) -> usize {
     }
     count
 }
+
+
+/* 4. Task: Quine with raw strings
+fn main() {
+    print!(r##"fn main(){{print!(r#"{0}"#,r#"{0}"#)}}"##,
+           r##"fn main(){{print!(r#"{0}"#,r#"{0}"#)}}"##
+    )
+}
+
+ */
