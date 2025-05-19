@@ -181,7 +181,7 @@ fn main() {
 }
  */
 
-// L4 - Toolchain - Example 4
+/* L4 - Toolchain - Example 4
 
 fn main() {
     // A byte string literal — an &[u8] of the ASCII codes for "Hello"
@@ -196,4 +196,89 @@ fn main() {
     // Verify they’re equal
     assert_eq!(bytes, hex);
 }
+ */
 
+/* EV4 - Example 1
+#[derive(Debug)]
+enum HttpStatus {
+    Ok = 200,
+    NotFound = 404,
+    InternalServerError = 500,
+}
+fn main() {
+    let a = HttpStatus::Ok;
+    let b = HttpStatus::NotFound;
+    let c = HttpStatus::InternalServerError;
+    println!("Ok: {:#?}", a );
+    println!("NotFound: {}", b as u16);
+    println!("InternalServerError: {}", c as u16);
+}
+*/
+
+/* EV4 - Example 2
+fn slicer(input: &str) -> Option<usize> {
+    // Iterate through all chars in input:
+    for (i, c) in input.chars().enumerate() {
+        if c == ' ' {
+            // Return index of whitespace:
+            return Some(i);
+        }
+    }
+
+    // If input doesn't contain whitespace:
+    None
+}
+
+fn main() {
+    let word = String::from("Please separate me ignoring  double whitespaces");
+
+    // Create mutable '&str' from 'String':
+    let mut new_word = &word[..]; // The magic of omitting
+
+    loop {
+        let idx = slicer(new_word);
+        // println!("IDX: {:?}", idx);
+        match idx {
+            Some(idx) => {
+                if idx > 0 { // We ignore double whitespaces
+                    println!("Sliced word: {}", &new_word[..idx]); // Slice from the start
+                } else {
+                    // println!("Whitespace found!");
+                }
+                new_word = &new_word[(idx + 1)..]; // Re-slice until the end
+            }
+            None => {
+                println!("Sliced word: {}", new_word);
+                break;
+            }
+        };
+    }
+}
+ */
+
+/* EV4 - Example 3
+fn print_data(data: Option<&char>) {
+    match data {
+        Some(data) => println!("Found character: {data}"),
+        None => println!("No character found."),
+    }
+}
+fn main() {
+    let v1 = vec!['R', 'u', 's', 't'];
+    let elem: Option<&char> = v1.get(2);
+    print_data(elem);
+    print_data(v1.get(4));
+}
+ */
+
+fn main() {
+    {
+        for c in "Ле".chars() {
+            println!("{c}");
+        }
+
+        for b in "Ле".bytes() {
+            println!("{b}");
+        }
+    }
+}
