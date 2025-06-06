@@ -1,8 +1,8 @@
 #![allow(dead_code)]
 
 use std::io;
-use std::fs::{File, OpenOptions};
-use std::io::{BufReader, Write};
+use std::fs::{File};
+use std::io::{BufReader};
 use serde::{Deserialize, Serialize};
 use serde_json::{from_reader, to_string_pretty, Error};
 
@@ -77,7 +77,7 @@ impl Library {
             Err(e) => panic!("Error: {e}"),
         };
         // serializing the library to JSON and into the file
-        let s = match serde_json::to_writer_pretty(&mut f, self){
+        match serde_json::to_writer_pretty(&mut f, self){
             Ok(s) => s,
             Err(e) => panic!("Error: {e}"),
         };
