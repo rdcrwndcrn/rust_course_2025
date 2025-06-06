@@ -70,24 +70,17 @@ impl Library {
         }
     }
 
-    fn write_library_file(&mut self) -> io::Result<()> {
-        // serializing the library to a string
-        let s = match serde_json::to_string_pretty(&self){
+    fn write_library_file(&mut self) {        
+        // opens our file binding it to f
+        let mut f = match File::open("exercise_4/library.json"){
+            Ok(file) => file,
+            Err(e) => panic!("Error: {e}"),
+        };
+        // serializing the library to JSON and into the file
+        let s = match serde_json::to_writer_pretty(&mut f, self){
             Ok(s) => s,
             Err(e) => panic!("Error: {e}"),
         };
-
-        // 2) Open or create+truncate the file in writing‐only mode
-        let mut file = OpenOptions::new()
-            .write(true)
-            .create(true)
-            .truncate(true)
-            .open("library.json")?;
-
-        // 3) Call `write_all` which underneath calls `write` until all bytes are written.
-        file.write_all(s.as_bytes())?;
-
-        Ok(())
     }
 }
 
