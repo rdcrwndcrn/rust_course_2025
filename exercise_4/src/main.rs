@@ -11,7 +11,77 @@ struct Library {
     items: Vec<Item>,
 }
 
+#[derive(Deserialize, Serialize, Debug)]
+#[serde(tag = "type", rename_all = "camelCase")]
+enum Item {
+    Book(Book),
+    Newspaper(Newspaper),
+    Movie(Movie),
+}
+
+#[derive(Deserialize, Serialize, Debug)]
+#[serde(rename_all = "camelCase")]
+struct Book{
+    title: String,
+    year: u16,
+    author: Author
+}
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
+#[serde(rename_all = "camelCase")]
+struct Author {
+    name: String,
+    birth_year: u16
+}
+
+#[derive(Deserialize, Serialize, Debug)]
+#[serde(rename_all = "camelCase")]
+struct Newspaper {
+    title: String,
+    date: String,
+}
+
+#[derive(Deserialize, Serialize, Debug)]
+#[serde(rename_all = "camelCase")]
+struct Movie {
+    title: String,
+    year: u16,
+}
+
 impl Library {
+
+    fn read_library_file() -> Result<Library, Error> {
+        // opens our file binding it to f
+        let f = File::open("exercise_4/library.json");
+        // check if the result is ok or an error
+        if f.is_ok(){
+            // buffering that file - for efficiency purposes, something with not directly using a Read instance
+            let r = BufReader::new(f.unwrap());
+            // using the serde_json::from_reader fn to deserializing our file into the existing data structure: Library
+            let lib = from_reader(r);
+            // check if the result of operation is ok or error
+            if lib.is_ok(){
+                lib
+            } else {
+                panic!("Error: {:?}", lib.err());
+            }
+        } else {
+            panic!("Error: {:?}", f.err());
+        }
+    }
+
+    fn write_library_file(&mut self) {
+        // opens our file binding it to f
+        let mut f = match File::open("exercise_4/library.json"){
+            Ok(file) => file,
+            Err(e) => panic!("Error: {e}"),
+        };
+        // serializing the library to JSON and into the file
+        match serde_json::to_writer_pretty(&mut f, self){
+            Ok(s) => s,
+            Err(e) => panic!("Error: {e}"),
+        };
+    }
 
     fn add_item(&mut self, i: Item) -> &mut Self {
         self.items.push(i);
@@ -49,56 +119,6 @@ impl Library {
         }
         self
     }
-
-    fn read_library_file() -> Result<Library, Error> {
-        // opens our file binding it to f
-        let f = File::open("exercise_4/library.json");
-        // check if the result is ok or an error
-        if f.is_ok(){
-            // buffering that file - for efficiency purposes, something with not directly using a Read instance
-            let r = BufReader::new(f.unwrap());
-            // using the serde_json::from_reader fn to deserializing our file into the existing data structure: Library
-            let lib = from_reader(r);
-            // check if the result of operation is ok or error
-            if lib.is_ok(){
-                lib
-            } else {
-                panic!("Error: {:?}", lib.err());
-            }
-        } else {
-            panic!("Error: {:?}", f.err());
-        }
-    }
-
-    fn write_library_file(&mut self) {        
-        // opens our file binding it to f
-        let mut f = match File::open("exercise_4/library.json"){
-            Ok(file) => file,
-            Err(e) => panic!("Error: {e}"),
-        };
-        // serializing the library to JSON and into the file
-        match serde_json::to_writer_pretty(&mut f, self){
-            Ok(s) => s,
-            Err(e) => panic!("Error: {e}"),
-        };
-    }
-}
-
-
-#[derive(Deserialize, Serialize, Debug)]
-#[serde(tag = "type", rename_all = "camelCase")]
-enum Item {
-    Book(Book),
-    Newspaper(Newspaper),
-    Movie(Movie),
-}
-
-#[derive(Deserialize, Serialize, Debug)]
-#[serde(rename_all = "camelCase")]
-struct Book{
-    title: String,
-    year: u16,
-    author: Author
 }
 
 impl Book {
@@ -122,20 +142,6 @@ impl Book {
     }
 }
 
-#[derive(Deserialize, Serialize, Debug, Clone)]
-#[serde(rename_all = "camelCase")]
-struct Author {
-    name: String,
-    birth_year: u16
-}
-
-#[derive(Deserialize, Serialize, Debug)]
-#[serde(rename_all = "camelCase")]
-struct Newspaper {
-    title: String,
-    date: String,
-}
-
 impl Newspaper {
     fn new(title: String, date:String) -> Self {
         Self {title, date}
@@ -150,13 +156,6 @@ impl Newspaper {
         self.date = new_date;
         self
     }
-}
-
-#[derive(Deserialize, Serialize, Debug)]
-#[serde(rename_all = "camelCase")]
-struct Movie {
-    title: String,
-    year: u16,
 }
 
 impl Movie {
