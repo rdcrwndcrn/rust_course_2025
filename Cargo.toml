@@ -7,6 +7,6 @@ members = [
     "fibonacci_number",
     "exercise_3a",
     "exercise_4",
-    "sorn", ]
+    "sorn", "exercise_5", ]
 
 resolver = "3"
