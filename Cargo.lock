@@ -145,6 +145,13 @@ name = "fahrenheit_celsius_converter"
 version = "0.1.0"
 
 [[package]]
+name = "fib_v3"
+version = "0.1.0"
+dependencies = [
+ "num-bigint",
+]
+
+[[package]]
 name = "fibonacci_number"
 version = "0.1.0"
 dependencies = [
