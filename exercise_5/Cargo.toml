@@ -11,4 +11,5 @@ version = "1.17.0"
 # Lets you generate random UUIDs
 features = [
     "v4",
+    "serde"
 ]
