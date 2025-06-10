@@ -17,7 +17,6 @@ impl Fibonacci {
 }
 
 impl Iterator for Fibonacci {
-    // @TODO Add correct type for alias "Item" and implement the method "next()"
     type Item = BigUint;
 
     fn next(&mut self) -> Option<Self::Item>{
@@ -42,7 +41,6 @@ fn main() {
         .unwrap_or(BigUint::from(10_u32));
 
     // For the loop, we need to make use of a special method offered by Iterator trait
-    // @TODO Implement the loop below
     let mut iteration = BigUint::from(0u8);
     let one = BigUint::from(1u8);
     while &iteration < &number {
