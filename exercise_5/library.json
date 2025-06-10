@@ -1,0 +1,149 @@
+{
+  "items": [
+    {
+      "type": "book",
+      "title": "Angels & Demons",
+      "year": 2000,
+      "isbn": "9780593055045",
+      "authors": [
+        {
+          "name": "Dan Brown",
+          "birthYear": 1964
+        }
+      ]
+    },
+    {
+      "type": "book",
+      "title": "The Da Vinci Code",
+      "year": 2003,
+      "isbn": "9780307474278",
+      "authors": [
+        {
+          "name": "Dan Brown",
+          "birthYear": 1964
+        }
+      ]
+    },
+    {
+      "type": "book",
+      "title": "The Lost Symbol",
+      "year": 2009,
+      "isbn": "9780385504225",
+      "authors": [
+        {
+          "name": "Dan Brown",
+          "birthYear": 1964
+        }
+      ]
+    },
+    {
+      "type": "book",
+      "title": "Inferno",
+      "year": 2013,
+      "isbn": "9780385537858",
+      "authors": [
+        {
+          "name": "Dan Brown",
+          "birthYear": 1964
+        }
+      ]
+    },
+    {
+      "type": "book",
+      "title": "Origin",
+      "year": 2017,
+      "isbn": "9780593078754",
+      "authors": [
+        {
+          "name": "Dan Brown",
+          "birthYear": 1964
+        }
+      ]
+    },
+    {
+      "type": "book",
+      "title": "The Rust Programming Language",
+      "year": 2023,
+      "isbn": "9781718503113",
+      "authors": [
+        {
+          "name": "Steve Klabnik",
+          "birthYear": null
+        },
+        {
+          "name": "Carol Nichols",
+          "birthYear": null
+        }
+      ]
+    },
+    {
+      "type": "newspaper",
+      "title": "Süddeutsche Zeitung",
+      "date": "01.04.2002"
+    },
+    {
+      "type": "newspaper",
+      "title": "Süddeutsche Zeitung",
+      "date": "02.04.2002"
+    },
+    {
+      "type": "newspaper",
+      "title": "Süddeutsche Zeitung",
+      "date": "03.04.2002"
+    },
+    {
+      "type": "movie",
+      "title": "The Da Vinci Code",
+      "year": 2006,
+      "director": {
+        "name": "Ron Howard",
+        "birthYear": 1954
+      }
+    },
+    {
+      "type": "movie",
+      "title": "Angels & Demons",
+      "year": 2009,
+      "director": {
+        "name": "Ron Howard",
+        "birthYear": 1954
+      }
+    },
+    {
+      "type": "movie",
+      "title": "Inferno",
+      "year": 2016,
+      "director": {
+        "name": "Ron Howard",
+        "birthYear": 1954
+      }
+    },
+    {
+      "type": "movie",
+      "title": "The Hitchhiker's Guide to the Galaxy",
+      "year": 2005,
+      "director": {
+        "name": "Garth Jennings",
+        "birthYear": 1972
+      }
+    },
+    {
+      "type": "movie",
+      "title": "The Day After Tomorrow",
+      "year": 2004,
+      "director": {
+        "name": "Roland Emmerich",
+        "birthYear": 1955
+      }
+    },
+    {
+      "type": "movie",
+      "title": "Monty Python's Life of Brian",
+      "year": 1979,
+      "director": {
+        "name": "Terry Jones",
+        "birthYear": 1942
+      }
+    }
+  ]
+}
