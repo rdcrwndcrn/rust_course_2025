@@ -105,7 +105,7 @@ impl LibraryOld {
 
     fn read_library_from_json_file() -> Result<LibraryOld, Error> {
         // opens our file binding it to f
-        let f = File::open("exercise_5/library.json");
+        let f = File::open("../library.json");
         // check if the result is ok or an error
         if f.is_ok(){
             // buffering that file - for efficiency purposes,
@@ -127,7 +127,7 @@ impl LibraryOld {
 
     fn write_library_to_json_file(&mut self) {
         // opens our file binding it to f
-        let mut f = match File::create("rust_course_2025/exercise_5/library.json"){
+        let mut f = match File::create("rust_course_2025/json_converter_v1/library.json"){
             Ok(file) => file,
             Err(e) => panic!("Error: {e}"),
         };
@@ -217,7 +217,7 @@ impl Library {
     
     fn write_library_to_json_file(self) {
         // if its existing crate deletes it, what's in it, otherwise just creating the file
-        let mut f = File::create("exercise_5/library_new.json")
+        let mut f = File::create("../library_new.json")
             // so we don't need to match the error with match
             // expect does the same, Ok(value) => values,
             // if it works, and if not, it displays our custom error message
@@ -226,7 +226,7 @@ impl Library {
             .expect("Error: Who even needs pretty writing.. right?");
     }
 
-    fn read_from_library_old(mut lib_old: LibraryOld) -> Self {
+    fn read_from_library_old(lib_old: &mut LibraryOld) -> Self {
         // getting items out of the old library
         let old_items = lib_old.get_items();
 
@@ -404,7 +404,7 @@ fn get_u16_input(message: &str) -> u16 {
 
 fn main() {
     // reading hard-coded library.json and binding it with a match
-    let l = LibraryOld::read_library_from_json_file().
+    let mut l = LibraryOld::read_library_from_json_file().
         expect("Error: Cannot read lib json file");
 
     // using serde_json's pretty print the new lip
@@ -412,7 +412,7 @@ fn main() {
     println!("Pretty print: {s}");
     
     // converting the data structure to the new one
-    let new_l = Library::read_from_library_old(l);
+    let new_l = Library::read_from_library_old(&mut l);
     
     // writing the new one to a file
     new_l.write_library_to_json_file();

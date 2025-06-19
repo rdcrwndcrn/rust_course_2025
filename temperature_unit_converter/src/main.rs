@@ -11,7 +11,7 @@ fn main() {
         let to = get_user_input() as u8;
 
         println!("Put you number in:");
-        let number = get_user_input();
+        let number = get_user_input() as f64;
 
         match (from,to) {
             (1,1) => {
@@ -72,7 +72,7 @@ fn kelvin_to_fahrenheit(value: f64) -> f64 {
     ((value - 273.15) / 1.8) + 32.0
 }
 
-fn get_user_input() -> f64 {
+fn get_user_input() -> u8 {
     loop {
         let mut user_input = String::new();
         let read_result = io::stdin().read_line(&mut user_input);
@@ -88,7 +88,7 @@ fn get_user_input() -> f64 {
                     std::process::exit(0);
                 }
                 // check if input is usable and if that's the case, return it
-                match user_input_trimmed.parse::<f64>() {
+                match user_input_trimmed.parse::<u8>() {
                     Ok(value) => {
                         // returning value
                         return value;

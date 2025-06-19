@@ -1,6 +1,7 @@
 mod text_analyzer;
+mod converter;
+mod types;
 
 fn main() {
-    println!("Hello, world!");
     text_analyzer::run();
 }
