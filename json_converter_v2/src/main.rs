@@ -1,7 +1,22 @@
-mod text_analyzer;
-mod converter;
 mod types;
+mod deserializer;
+mod serializer;
+mod converter;
+
+
+use crate::types::old_types::LibraryOld;
+use crate::types::new_types::Library;
+use serde_json::to_string_pretty;
+
 
 fn main() {
-    text_analyzer::run();
+    let mut l = LibraryOld::read_library_from_json_file().
+        expect("Error: Cannot read lib json file");
+    
+    let s = to_string_pretty(&l).unwrap();
+    println!("Pretty print: {s}");
+    
+    let new_l = Library::lib_converter(&mut l);
+
+    new_l.write_library_to_json_file();
 }

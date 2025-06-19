@@ -1,6 +1,6 @@
-use std::collections::HashMap;
 use crate::types::old_types::*;
 use crate::types::new_types::*;
+use std::collections::HashMap;
 use uuid::Uuid;
 impl Library {
 
@@ -11,7 +11,7 @@ impl Library {
             lookup: HashMap::new()
         }
     }
-    fn lib_converter(lib_old: &mut LibraryOld) -> Self {
+    pub fn lib_converter(lib_old: &mut LibraryOld) -> Self {
         // getting items out of the old library
         let old_items = lib_old.items.clone();
 
@@ -116,35 +116,5 @@ impl Library {
     fn add_item(&mut self, item:Item) -> &mut Self {
         self.items.push(item);
         self
-    }
-}
-
-impl Person {
-    fn new(name:String, birth_year:Option<u16>) -> Self{
-        Person{
-            name,
-            birth_year
-        }
-    }
-}
-
-impl Book {
-    fn new(title: String, year: u16, isbn:String, authors: Vec<Uuid>) -> Self {
-        Self {
-            title,
-            year,
-            isbn,
-            authors
-        }
-    }
-}
-
-impl Movie {
-    fn new(title: String, year: u16, director: Uuid) -> Self {
-        Movie {
-            title,
-            year,
-            director
-        }
     }
 }

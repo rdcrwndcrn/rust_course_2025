@@ -143,35 +143,14 @@ dependencies = [
 ]
 
 [[package]]
-name = "exercise_5"
-version = "0.1.0"
-dependencies = [
- "serde",
- "serde_json",
- "uuid",
-]
-
-[[package]]
-name = "exercise_6"
-version = "0.1.0"
-dependencies = [
- "serde",
- "uuid",
-]
-
-[[package]]
-name = "fahrenheit_celsius_converter"
-version = "0.1.0"
-
-[[package]]
-name = "fib_v3"
+name = "fib_v1"
 version = "0.1.0"
 dependencies = [
  "num-bigint",
 ]
 
 [[package]]
-name = "fibonacci_number"
+name = "fib_v3"
 version = "0.1.0"
 dependencies = [
  "num-bigint",
@@ -226,6 +205,24 @@ checksum = "1cfaf33c695fc6e08064efbc1f72ec937429614f25eef83af942d0e227c3a28f"
 dependencies = [
  "once_cell",
  "wasm-bindgen",
+]
+
+[[package]]
+name = "json_converter_v1"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
+ "uuid",
+]
+
+[[package]]
+name = "json_converter_v2"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
+ "uuid",
 ]
 
 [[package]]
@@ -447,6 +444,10 @@ dependencies = [
  "quote",
  "unicode-ident",
 ]
+
+[[package]]
+name = "temperature_unit_converter"
+version = "0.1.0"
 
 [[package]]
 name = "unicode-ident"

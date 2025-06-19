@@ -1,34 +1,4 @@
 {
-  "persons": {
-    "4c4c77b9-81bb-45e6-9df2-c43844afbd75": {
-      "name": "Terry Jones",
-      "birthYear": 1942
-    },
-    "9d66410e-09a6-4aa3-aa2b-368f41448d5e": {
-      "name": "Roland Emmerich",
-      "birthYear": 1955
-    },
-    "22e08ef8-1580-4f64-904d-5dcf534306d2": {
-      "name": "Steve Klabnik",
-      "birthYear": null
-    },
-    "8caa2825-b2d4-4978-b39a-658561afc39c": {
-      "name": "Carol Nichols",
-      "birthYear": null
-    },
-    "263bb675-0425-4f42-809d-c9301cef2f39": {
-      "name": "Garth Jennings",
-      "birthYear": 1972
-    },
-    "1da52380-fb14-4080-944d-1026de87ae65": {
-      "name": "Dan Brown",
-      "birthYear": 1964
-    },
-    "f372ad9a-85e5-476d-9fcb-9133fa9d5613": {
-      "name": "Ron Howard",
-      "birthYear": 1954
-    }
-  },
   "items": [
     {
       "type": "book",
@@ -36,7 +6,10 @@
       "year": 2000,
       "isbn": "9780593055045",
       "authors": [
-        "1da52380-fb14-4080-944d-1026de87ae65"
+        {
+          "name": "Dan Brown",
+          "birthYear": 1964
+        }
       ]
     },
     {
@@ -45,7 +18,10 @@
       "year": 2003,
       "isbn": "9780307474278",
       "authors": [
-        "1da52380-fb14-4080-944d-1026de87ae65"
+        {
+          "name": "Dan Brown",
+          "birthYear": 1964
+        }
       ]
     },
     {
@@ -54,7 +30,10 @@
       "year": 2009,
       "isbn": "9780385504225",
       "authors": [
-        "1da52380-fb14-4080-944d-1026de87ae65"
+        {
+          "name": "Dan Brown",
+          "birthYear": 1964
+        }
       ]
     },
     {
@@ -63,7 +42,10 @@
       "year": 2013,
       "isbn": "9780385537858",
       "authors": [
-        "1da52380-fb14-4080-944d-1026de87ae65"
+        {
+          "name": "Dan Brown",
+          "birthYear": 1964
+        }
       ]
     },
     {
@@ -72,7 +54,10 @@
       "year": 2017,
       "isbn": "9780593078754",
       "authors": [
-        "1da52380-fb14-4080-944d-1026de87ae65"
+        {
+          "name": "Dan Brown",
+          "birthYear": 1964
+        }
       ]
     },
     {
@@ -81,8 +66,14 @@
       "year": 2023,
       "isbn": "9781718503113",
       "authors": [
-        "22e08ef8-1580-4f64-904d-5dcf534306d2",
-        "8caa2825-b2d4-4978-b39a-658561afc39c"
+        {
+          "name": "Steve Klabnik",
+          "birthYear": null
+        },
+        {
+          "name": "Carol Nichols",
+          "birthYear": null
+        }
       ]
     },
     {
@@ -104,37 +95,55 @@
       "type": "movie",
       "title": "The Da Vinci Code",
       "year": 2006,
-      "director": "f372ad9a-85e5-476d-9fcb-9133fa9d5613"
+      "director": {
+        "name": "Ron Howard",
+        "birthYear": 1954
+      }
     },
     {
       "type": "movie",
       "title": "Angels & Demons",
       "year": 2009,
-      "director": "f372ad9a-85e5-476d-9fcb-9133fa9d5613"
+      "director": {
+        "name": "Ron Howard",
+        "birthYear": 1954
+      }
     },
     {
       "type": "movie",
       "title": "Inferno",
       "year": 2016,
-      "director": "f372ad9a-85e5-476d-9fcb-9133fa9d5613"
+      "director": {
+        "name": "Ron Howard",
+        "birthYear": 1954
+      }
     },
     {
       "type": "movie",
       "title": "The Hitchhiker's Guide to the Galaxy",
       "year": 2005,
-      "director": "263bb675-0425-4f42-809d-c9301cef2f39"
+      "director": {
+        "name": "Garth Jennings",
+        "birthYear": 1972
+      }
     },
     {
       "type": "movie",
       "title": "The Day After Tomorrow",
       "year": 2004,
-      "director": "9d66410e-09a6-4aa3-aa2b-368f41448d5e"
+      "director": {
+        "name": "Roland Emmerich",
+        "birthYear": 1955
+      }
     },
     {
       "type": "movie",
       "title": "Monty Python's Life of Brian",
       "year": 1979,
-      "director": "4c4c77b9-81bb-45e6-9df2-c43844afbd75"
+      "director": {
+        "name": "Terry Jones",
+        "birthYear": 1942
+      }
     }
   ]
 }
