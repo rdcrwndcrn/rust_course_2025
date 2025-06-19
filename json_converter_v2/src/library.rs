@@ -2,6 +2,7 @@ use crate::types::old_types::*;
 use crate::types::new_types::*;
 use std::collections::HashMap;
 use uuid::Uuid;
+
 impl Library {
 
     fn new() -> Self {
@@ -11,7 +12,7 @@ impl Library {
             lookup: HashMap::new()
         }
     }
-    pub fn lib_converter(lib_old: &mut LibraryOld) -> Self {
+    pub fn convert_old_to_new_library(lib_old: &mut LibraryOld) -> Self {
         // getting items out of the old library
         let old_items = lib_old.items.clone();
 
@@ -79,10 +80,6 @@ impl Library {
         lib
     }
 
-    fn check_if_person_exists(&mut self, person:&Person) -> Option<Uuid> {
-        self.lookup.get(person).copied()
-    }
-
     // making a person from an authors struct; for libraryOld -> libraryNew
     fn author_to_person(AuthorOld { name, birth_year }: AuthorOld) -> Person {
         Person {
@@ -97,6 +94,10 @@ impl Library {
             name,
             birth_year
         }
+    }
+
+    fn check_if_person_exists(&mut self, person:&Person) -> Option<Uuid> {
+        self.lookup.get(person).copied()
     }
 
     fn add_person(&mut self, person:Person, uuid: Uuid) -> &mut Self {
@@ -116,5 +117,112 @@ impl Library {
     fn add_item(&mut self, item:Item) -> &mut Self {
         self.items.push(item);
         self
+    }
+
+    fn add_book(&mut self, title:String, year:u16, isbn:String, author: Vec<Uuid>) -> &mut Self {
+        self.add_item(Item::Book(Book::new(title, year, isbn, author)));
+        self
+    }
+
+    fn add_newspaper(&mut self, title:String, date:String) -> &mut Self {
+        self.add_item(Item::Newspaper(Newspaper::new(title, date)));
+        self
+    }
+
+    fn add_movie(&mut self, title:String, year:u16, director: Uuid) -> &mut Self {
+        self.add_item(Item::Movie(Movie::new(title, year, director)));
+        self
+    }
+
+    fn add_series(&mut self, series: Vec<Item>) -> &mut Self {
+        self.items.extend(series);
+        self
+    }
+}
+
+impl Person {
+    fn new(name:String, birth_year:Option<u16>) -> Self{
+        Person{
+            name,
+            birth_year
+        }
+    }
+    
+    fn set_name(&mut self, new_name:String) -> &mut Self {
+        self.name = new_name;
+        self
+    }
+    
+    pub fn get_name(&mut self) -> String {
+        self.name.clone()
+    }
+    
+    pub fn set_birth_year(&mut self, new_birth_year: u16) -> &mut Self {
+        self.birth_year = Some(new_birth_year);
+        self
+    }
+    
+    pub fn get_birth_year(&mut self) -> Option<u16> {
+        self.birth_year
+    }
+}
+
+impl Book {
+    fn new(title: String, year: u16, isbn:String, authors: Vec<Uuid>) -> Self {
+        Self {
+            title,
+            year,
+            isbn,
+            authors
+        }
+    }
+    
+    fn get_title(&mut self) -> String {
+        self.title.clone()
+    }
+    
+    fn get_year(&mut self) -> u16 {
+        self.year
+    }
+    
+    fn get_isbn(&mut self) -> String {
+        self.isbn.clone()
+    }
+}
+
+impl Movie {
+    fn new(title: String, year: u16, director: Uuid) -> Self {
+        Movie {
+            title,
+            year,
+            director
+        }
+    }
+    
+    fn get_title(&mut self) -> String {
+        self.title.clone()
+    }
+    
+    fn get_year(&mut self) -> u16 {
+        self.year
+    }
+    
+    fn get_director(&mut self) -> Uuid {
+        self.director
+    }
+    
+}
+
+impl Newspaper {
+    fn new(title: String, date:String) -> Self {
+        Self {title, date}
+    }
+
+    fn get_title(&mut self) -> String {
+        self.title.clone()
+    }
+
+    fn get_date(&mut self) -> String {
+        self.date.clone()
     }
 }

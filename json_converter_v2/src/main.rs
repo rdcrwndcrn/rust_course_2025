@@ -1,8 +1,6 @@
 mod types;
-mod deserializer;
-mod serializer;
-mod converter;
-
+mod serde;
+mod library;
 
 use crate::types::old_types::LibraryOld;
 use crate::types::new_types::Library;
@@ -16,7 +14,7 @@ fn main() {
     let s = to_string_pretty(&l).unwrap();
     println!("Pretty print: {s}");
     
-    let new_l = Library::lib_converter(&mut l);
+    let new_l = Library::convert_old_to_new_library(&mut l);
 
     new_l.write_library_to_json_file();
 }
