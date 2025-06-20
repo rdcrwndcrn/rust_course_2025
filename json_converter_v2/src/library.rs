@@ -13,49 +13,39 @@ impl Library {
         }
     }
     pub fn convert_old_to_new_library(lib_old: &mut LibraryOld) -> Self {
-        // getting items out of the old library
         let old_items = lib_old.items.clone();
-
-        // initializing a new lib
         let mut lib = Library::new();
-
-        // iterating over the items
         for item_variant in old_items {
-            // destructing the item and adding the newly structured objects to the new library
+            // destructing items and adding the newly structured objects to the new library
             match item_variant {
                 ItemOld::Book(BookOld{ title, year, isbn, authors }) => {
-                    // vector with persons uuid for book authors
                     let mut persons: Vec<Uuid> = Vec::new();
-                    // looping over the authors
                     for author in authors {
-                        // creating persons from authors
+                        // make person from author
                         let person = Self::author_to_person(author);
                         let mut uuid = Uuid::new_v4();
                         // check if the person is already in lib person before adding it
-                        let exists = lib.check_if_person_exists(&person);
+                        let exists = lib.person_lookup(&person);
                         if exists.is_some(){
                             // person already in HashMap
                             uuid = exists.unwrap();
-                            persons.push(uuid);
                         } else {
                             // person not in HashMap
-                            // adds person to lib 
                             lib.add_person(person, uuid);
-                            // adds uuid of the author to persons
-                            persons.push(uuid);
                         }
+                        // add uuid to vec for the authors-field of this book
+                        persons.push(uuid);
 
                     }
                     let authors = persons;
-                    // creating a book object and adding it to the library
                     lib.add_item(Item::Book(Book{title, year, isbn, authors}));
                 }
                 ItemOld::Movie(MovieOld{ title, year, director }) => {
-                    // creating person from director
+                    // make person from director
                     let person = Self::director_to_person(director);
                     let mut director_uuid= Uuid::new_v4();
                     // check if the director already exists in lib persons
-                    let exists = lib.check_if_person_exists(&person);
+                    let exists = lib.person_lookup(&person);
                     if exists.is_some(){
                         // person already exists 
                         director_uuid = exists.unwrap();
@@ -96,13 +86,13 @@ impl Library {
         }
     }
 
-    fn check_if_person_exists(&mut self, person:&Person) -> Option<Uuid> {
+    fn person_lookup(&mut self, person:&Person) -> Option<Uuid> {
         self.lookup.get(person).copied()
     }
 
     fn add_person(&mut self, person:Person, uuid: Uuid) -> &mut Self {
         // to be safe to check if already in the library
-        let exists = self.check_if_person_exists(&person);
+        let exists = self.person_lookup(&person);
         // if true person does already exist
         if exists.is_some(){
             return self;
@@ -138,6 +128,69 @@ impl Library {
         self.items.extend(series);
         self
     }
+
+    fn filter_book(&self) -> Vec<&Book> {
+        self.items
+            .iter()
+            .filter(|item| matches!(item, Item::Book(_)))
+            .map(|item| if let Item::Book(b) = item {
+                b
+            } else {
+                unreachable!()
+            })
+            .collect()
+    }
+
+    fn filter_newspaper(&mut self) -> Vec<&Newspaper> {
+        self.items
+            .iter()
+            .filter_map(|x| match x {
+                Item::Newspaper(n) => Some(n),
+                _ => None
+            })
+            .collect()
+    }
+
+     fn filter_movie(&mut self) -> Vec<&Movie> {
+         self.items
+             .iter()
+             .filter_map(|m| match m {
+                 Item::Movie(m) => Some(m),
+                 _ => None
+             })
+             .collect()
+     }
+
+    fn search_by_title(&mut self, search: &str) -> Vec<&Item> {
+        self.items
+            .iter()
+            .filter(|item| match item {
+                Item::Book(b)  => b.title.contains(search),
+                Item::Movie(m )  => m.title.contains(search),
+                Item::Newspaper(n) => n.title.contains(search)
+            })
+            .collect()
+    }
+
+    // sorts items by title
+    pub fn sort_by_title(&mut self) {
+       self.items.sort_by_key(|item| match item {
+               Item::Movie(m) => m.title.clone(),
+               Item::Newspaper(n) => n.title.clone(),
+               Item::Book(b) => b.title.clone()
+           });
+    }
+
+    /* sorts persons by name
+    fn sort_by_name(&mut self) {
+        let mut persons_vec: Vec<(Uuid, Person)> = self.persons.drain().collect(); 
+        persons_vec.sort_by_key(|(_,person)| person.name.clone());
+        for (u, p) in persons_vec {
+            self.persons.insert(u, p);
+        }
+    }
+     */
+
 }
 
 impl Person {
@@ -147,21 +200,21 @@ impl Person {
             birth_year
         }
     }
-    
+
     fn set_name(&mut self, new_name:String) -> &mut Self {
         self.name = new_name;
         self
     }
-    
+
     pub fn get_name(&mut self) -> String {
         self.name.clone()
     }
-    
+
     pub fn set_birth_year(&mut self, new_birth_year: u16) -> &mut Self {
         self.birth_year = Some(new_birth_year);
         self
     }
-    
+
     pub fn get_birth_year(&mut self) -> Option<u16> {
         self.birth_year
     }
@@ -176,15 +229,15 @@ impl Book {
             authors
         }
     }
-    
+
     fn get_title(&mut self) -> String {
         self.title.clone()
     }
-    
+
     fn get_year(&mut self) -> u16 {
         self.year
     }
-    
+
     fn get_isbn(&mut self) -> String {
         self.isbn.clone()
     }
@@ -198,19 +251,19 @@ impl Movie {
             director
         }
     }
-    
+
     fn get_title(&mut self) -> String {
         self.title.clone()
     }
-    
+
     fn get_year(&mut self) -> u16 {
         self.year
     }
-    
+
     fn get_director(&mut self) -> Uuid {
         self.director
     }
-    
+
 }
 
 impl Newspaper {
