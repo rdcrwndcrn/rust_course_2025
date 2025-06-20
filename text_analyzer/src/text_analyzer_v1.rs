@@ -1,6 +1,6 @@
 use std::io;
 
-pub fn basic_analytics() {
+pub fn slice_to_words() {
     // Get user input
     let input = get_input();
 
@@ -29,19 +29,17 @@ pub fn basic_analytics() {
     }
 }
 
-// Function to get user input from stdin
 fn get_input() -> String  {
     let mut input = String::new();
     let read_result = io::stdin().read_line(&mut input);
-
-    // Handle input result - retry on error, return trimmed string on success
+    
     match read_result {
         Ok(_) => input.trim().to_string(),
-        Err(_) => get_input() // Recursive call on error
+        Err(_) => get_input()
     }
 }
 
-// Function to find the next word boundary (space or end of string)
+// find the next word boundary (space or end of string)
 fn slicer(slice: &str) -> usize {
     // Iterate through characters with their indices using enumerate()
     for (i, c) in slice.chars().enumerate() {
@@ -54,7 +52,7 @@ fn slicer(slice: &str) -> usize {
     slice.len()
 }
 
-// Function to count characters in a string (excluding whitespace)
+// count characters in a string (excluding whitespace)
 fn count_chars (slice: &str) -> usize {
     slice.trim().len()
 }

@@ -1,7 +1,8 @@
-use crate::text_analyzer::basic_analytics;
+// use ..
 
-mod text_analyzer;
+mod text_analyzer_v1;
+mod text_analyzer_v2;
 
 fn main() {
-    basic_analytics()
+   
 }
