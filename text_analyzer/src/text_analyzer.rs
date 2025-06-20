@@ -1,6 +1,6 @@
 use std::io;
 
-pub fn run() {
+pub fn basic_analytics() {
     // Get user input
     let input = get_input();
 

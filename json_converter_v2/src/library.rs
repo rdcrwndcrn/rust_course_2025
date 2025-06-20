@@ -206,16 +206,16 @@ impl Person {
         self
     }
 
-    pub fn get_name(&mut self) -> String {
+    fn get_name(&mut self) -> String {
         self.name.clone()
     }
 
-    pub fn set_birth_year(&mut self, new_birth_year: u16) -> &mut Self {
+    fn set_birth_year(&mut self, new_birth_year: u16) -> &mut Self {
         self.birth_year = Some(new_birth_year);
         self
     }
 
-    pub fn get_birth_year(&mut self) -> Option<u16> {
+    fn get_birth_year(&mut self) -> Option<u16> {
         self.birth_year
     }
 }
