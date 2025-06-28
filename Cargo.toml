@@ -1,6 +1,6 @@
 [workspace]
 members = [
-    "temperature_unit_converter", "exercise_1", "exercise_2", "lecture_examples", "fib_v1", "exercise_3",
-    "exercise_4", "sorn", "json_converter_v1", "fib_v3", "json_converter_v2", "text_analyzer", ]
+    "temp_unit_converter_v1", "exercise_1", "exercise_2", "lecture_examples", "fib_v1", "exercise_3",
+    "exercise_4", "sorn", "json_converter_v1", "fib_v3", "json_converter_v2", "text_analyzer", "temp_unit_converter_v2", "exercise_6", ]
 
 resolver = "3"

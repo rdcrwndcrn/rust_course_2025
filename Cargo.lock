@@ -143,6 +143,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "exercise_6"
+version = "0.1.0"
+
+[[package]]
 name = "fib_v1"
 version = "0.1.0"
 dependencies = [
@@ -446,7 +450,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "temperature_unit_converter"
+name = "temp_unit_converter_v1"
+version = "0.1.0"
+
+[[package]]
+name = "temp_unit_converter_v2"
 version = "0.1.0"
 
 [[package]]
